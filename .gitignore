@@ -1,0 +1,8 @@
+.DS_Store
+.bak
+node_modules/*
+auth/tokens.js
+!node_modules/.gitignore
+!src/node_modules/
+npm-debug.log
+build

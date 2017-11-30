@@ -1,0 +1,46 @@
+{
+  "jokes": {
+    "tell": [
+      "tell me a joke",
+      "do you know any jokes",
+      "tell a joke"
+    ]
+  },
+  "photo": {
+    "take": [
+      "take a photo",
+      "whats happening at home",
+      "what is happening at home",
+      "whats happening in the lounge",
+      "show me home",
+      "show me the lounge"
+    ]
+  },
+  "music": {
+    "find-and-play": [
+      "play the song",
+      "play anything by",
+      "play the album",
+      "put on the song",
+      "listen to",
+      "play "
+    ],
+    "next": [
+      "next track",
+      "next song",
+      "skip"
+    ],
+    "previus": [
+      "last track",
+      "play the last song"
+    ],
+    "pause": [
+      "pause",
+      "stop"
+    ],
+    "play": [
+      "*play",
+      "*start"
+    ]
+  }
+}

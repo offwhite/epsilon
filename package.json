@@ -1,0 +1,25 @@
+{
+  "name": "Aurora",
+  "version": "0.0.1",
+  "description": "Home Assistant",
+  "main": "index.js",
+  "author": "James White",
+  "license": "ISC",
+  "homepage": "http://jameswhite.website",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": {
+    "url": ""
+  },
+  "dependencies": {
+    "node-telegram-bot-api": "^0.29.0",
+    "say": "^0.14.0",
+    "sonus": "^0.1.9"
+  },
+  "devDependencies": {}
+}
