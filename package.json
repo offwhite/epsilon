@@ -17,6 +17,7 @@
     "url": ""
   },
   "dependencies": {
+    "moment": "^2.19.3",
     "node-telegram-bot-api": "^0.29.0",
     "say": "^0.14.0",
     "sonus": "^0.1.9"
