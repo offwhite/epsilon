@@ -9,7 +9,15 @@ const app = function(){
   app.contexts = {};
   app.requests = new Requests(app);
   app.telegram = new Telegram(app);
-  //app.speak = new Speak(app);
+  app.speak = new Speak(app);
+
+  app.postMessage = function(message, channel){
+    if(channel == 'speak'){
+      app.speak.say(message)
+    }else{
+      app.telegram.postMessage(message, channel)
+    }
+  }
 }
 
 app();

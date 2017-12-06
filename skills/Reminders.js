@@ -9,14 +9,12 @@ module.exports = function(app){
   skill.app = app;
 
   skill.setReminder = function(request, channel){
+    console.log('channel: ', channel)
     if(request == ''){
       skill.setContext(channel, '*', skill.setReminderTime, {action: ''})
       return 'Okay, when would you like reminding?'
     }
 
-    // reminder is empty - get time
-    // there is action but not time - get time, pass action
-    // there is time but not action - get action, pass time
     let action = request
     let time = false
 
@@ -30,7 +28,7 @@ module.exports = function(app){
 
     // we have both
     if(time && action != ''){
-      return skill.saveReminder(action, timeResults[0].start.date())
+      return skill.saveReminder(channel, action, timeResults[0].start.date())
     }
 
     // we have only time
@@ -46,8 +44,6 @@ module.exports = function(app){
       return "Okay, "+action+". When would you like reminding?"
     }
 
-
-
     return 'i dont recognise that command';
   }
 
@@ -61,38 +57,62 @@ module.exports = function(app){
     // action is in params - save
     if(params.action != ''){
       skill.clearContext(channel)
-      return skill.saveReminder(params.action, time)
+      return skill.saveReminder(channel, params.action, time)
     }
 
     // no action present - set context
     skill.setContext(channel, '*', skill.setReminderAction, {time: time})
+    // post a response
     const timeString = timeConverter.timeToString(false, moment(time))
     return "Okay, "+timeString+". What would you like reminding?"
   }
 
   skill.setReminderAction = function(request, channel, params){
-    skill.clearContext(channel)
-    return skill.saveReminder(request, params.time)
+    return skill.saveReminder(channel, request, params.time)
+  }
+
+  skill.setWakeUp = function(request, channel){
+    return skill.setReminder('wake up '+request, channel)
+  }
+
+  skill.setTimer = function(request, channel){
+    return skill.setReminder('The timer is up in '+request, channel)
+  }
+
+  skill.setTimer = function(request, channel){
+    //return skill.saveReminder(channel, 'The Tea is ready', )
   }
 
   // Helpers
 
-  skill.saveReminder = function(action, time){
-    console.log('SET THE REMINDER HERE: ')
-    console.log('action: ', action)
-    console.log('time: ', time)
-    // check if it's today,
-    const momentTime = moment(time)
-    const timeString = timeConverter.timeToString(false, momentTime)
+  skill.saveReminder = function(channel, action, time){
 
-    if(momentTime.format('DMM') == moment().format('DMM')){
-      const timeString = timeConverter.timeToString(false, momentTime)
+    skill.clearContext(channel)
+
+    const momentTime = moment(time)
+    // get number of seconds till event
+    const timeTill = momentTime.diff(moment(), 'milliseconds')
+    const isToday = momentTime.format('DMM') == moment().format('DMM')
+
+    // set the reminder
+    setTimeout(function(){
+      skill.runReminder(action, channel)
+    }, timeTill);
+
+    // post a reply
+    let timeString
+    if(isToday){
+      timeString = timeConverter.timeToString(false, momentTime)
     }else{
-      const timeString = timeConverter.timeToString(false, momentTime) + " On " + momentTime.format('Do MMM')
+      timeString = timeConverter.timeToString(false, momentTime) + " On " + momentTime.format('Do MMM')
     }
 
-    // check if it's this week
     return "Okay, I'll remind you, '"+action+"' at " +timeString
+  }
+
+  skill.runReminder = function(message, channel){
+    skill.app.postMessage('Bingly Bingly Beep: '+message, channel)
+    console.log('posting reminder', message, channel)
   }
 
 
