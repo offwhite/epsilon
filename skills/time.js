@@ -8,49 +8,48 @@ module.exports = function(app){
     return moment().format("dddd MMM Do YYYY");
   }
 
-  skill.currentTime = function(exact = false){
-    const date = new Date();
-    const timeString = date.toTimeString().split(' ')[0];
+  skill.currentTime = function(exact){
+    const date = moment();
+    return "It's " + skill.timeToString(exact, date);
+  }
+
+  skill.timeToString = function(exact, time){
 
     if(exact){
-      return timeString;
+      return time.format('hh:mm:ss')
     }
 
-    const time = timeString.split(':');
-    const hour = parseInt(time[0]);
-    const minute = parseInt(time[1]);
-
-    const prefix = 'The time is ';
-    const short_prefix = "It's ";
+    const hour = parseInt(time.format('hh'));
+    const minute = parseInt(time.format('m'));
 
     // return cardinals
 
     switch(minute) {
       case 0:
-          return short_prefix + skill.hourTo12(hour) + " o'clock";
+          return skill.hourTo12(hour) + " o'clock";
           break;
       case 15:
-          return short_prefix + 'quarter passed ' + skill.hourTo12(hour);
+          return 'quarter passed ' + skill.hourTo12(hour);
           break;
       case 30:
-          return short_prefix + 'half passed ' + skill.hourTo12(hour);
+          return 'half passed ' + skill.hourTo12(hour);
           break;
       case 45:
-          return short_prefix + ' quarter to ' + skill.hourTo12(hour + 1);
+          return ' quarter to ' + skill.hourTo12(hour + 1);
           break;
     }
 
     // 10/15/20 minutes to... or 8 minutes to...
     if((minute > 30 && minute%5 == 0) || minute > 50){
-      return prefix + (60 - minute) + skill.minuteWord(minute) + ' to ' + skill.hourTo12(hour+1);
+      return (60 - minute) + skill.minuteWord(minute) + ' to ' + skill.hourTo12(hour+1);
 
     // a few minutes passed
     }else if(minute < 15){
-      return prefix + minute + skill.minuteWord(minute) + ' passed ' + skill.hourTo12(hour);
+      return minute + skill.minuteWord(minute) + ' passed ' + skill.hourTo12(hour);
     }
 
     // standard time
-    return prefix + skill.hourTo12(hour) + ':' + minute;
+    return skill.hourTo12(hour) + ':' + minute;
   };
 
   // Helpers
