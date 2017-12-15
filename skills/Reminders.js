@@ -51,7 +51,7 @@ module.exports = function(app){
   skill.setReminderTime = function(request, channel, params){
     var time = Chrono.parseDate(request)
     if(time == null){
-      return "I don't recognise that as a time. Try 'Tonigh at ten', or 'in fifteen minutes'"
+      return "I don't recognise that as a time. Try 'Tonight at ten', or 'in fifteen minutes'"
     }
 
     // action is in params - save
@@ -79,8 +79,8 @@ module.exports = function(app){
     return skill.setReminder('The timer is up in '+request, channel)
   }
 
-  skill.setTimer = function(request, channel){
-    //return skill.saveReminder(channel, 'The Tea is ready', )
+  skill.setTeaTimer = function(channel){
+    return skill.setReminder('The tea is brewed in 4 minutes', channel)
   }
 
   // Helpers

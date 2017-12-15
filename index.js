@@ -1,17 +1,17 @@
-
-const Requests = require('./lib/Request');
-
+const exec = require('child_process').exec
 // interaction channels
-const Telegram = require('./lib/Telegram');
-const Speak = require('./lib/Speak');
-const NetworkMonitor = require('./lib/NetworkMonitor');
+const Telegram = require('./lib/Telegram')
+const Voice = require('./lib/Voice')
+const NetworkMonitor = require('./lib/NetworkMonitor')
+const Requests = require('./lib/Request')
 
 const app = function(){
   app.contexts = {}
-  app.bootSonus = false
+  app.bootSonus = true
   app.voiceCommands = true
-  app.speak = new Speak(app)
+  app.voice = new Voice(app)
   app.telegram = new Telegram(app)
+  app.local = true
 
   app.init = function(){
     app.networkMonitor = new NetworkMonitor(app)
@@ -19,8 +19,8 @@ const app = function(){
   }
 
   app.postMessage = function(message, channel){
-    if(channel == 'speak'){
-      app.speak.say(message)
+    if(channel == 'voice'){
+      app.voice.say(message)
     }else{
       app.telegram.postMessage(message, channel)
     }
@@ -37,12 +37,20 @@ const app = function(){
     }
   }
 
-  app.terminate = function(){
-    process.exit()
+  app.shutdown = function(){
+    exec('sudo shutdown now')
+  }
+
+  app.reboot = function(){
+    exec('sudo reboot now')
   }
 
   app.log = function(message){
-    app.telegram.log(message)
+    if(app.local){
+      console.log(message)
+    }else{
+      app.telegram.log('log: '+message)
+    }
   }
 
   app.init()
