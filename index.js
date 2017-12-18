@@ -9,13 +9,14 @@ const app = function(){
   app.contexts = {}
   app.bootSonus = true
   app.voiceCommands = true
-  app.voice = new Voice(app)
+  app.logToAdmin = false
   app.telegram = new Telegram(app)
-  app.local = true
 
   app.init = function(){
+    app.voice = new Voice(app)
     app.networkMonitor = new NetworkMonitor(app)
     app.requests = new Requests(app)
+    app.log('I am online now')
   }
 
   app.postMessage = function(message, channel){
@@ -37,6 +38,10 @@ const app = function(){
     }
   }
 
+  app.voiceCommandState = function(){
+    return app.voiceCommands ? 'Voice commands on' : 'Voice commands off'
+  }
+
   app.shutdown = function(){
     exec('sudo shutdown now')
   }
@@ -46,11 +51,10 @@ const app = function(){
   }
 
   app.log = function(message){
-    if(app.local){
-      console.log(message)
-    }else{
+    if(app.logToAdmin){
       app.telegram.log('log: '+message)
     }
+    console.log(message)
   }
 
   app.init()
