@@ -1,6 +1,7 @@
 .DS_Store
 .bak
 node_modules/*
+homebridge/accessories/homebridge-music-box/node_modules/*
 auth/tokens.js
 resources/aurora-google-key.json
 !node_modules/.gitignore
