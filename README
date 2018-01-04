@@ -2,6 +2,8 @@
            EPSILON SETUP
 --------------------------------
 
+These are more notes to self. Sorry bout that.
+
 1. flash a micro sd car with raspbian image
 2. mount it on the computer again (put it back into the laptop)
 3. `cd /Volumes/boot`
