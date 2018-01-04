@@ -1,0 +1,68 @@
+{
+    "bridge": {
+        "name": "Epsilon.",
+        "username": "CC:22:3D:E3:CE:31",
+        "port": 51826,
+        "pin": "031-45-152"
+    },
+
+    "description": "Epsilon",
+
+    "accessories": [
+      {
+        "accessory": "Http",
+        "name": "Music box",
+        "switchHandling": "realtime",
+        "http_method": "GET",
+        "on_url":      "http://localhost:3000/play-music",
+        "off_url":     "http://localhost:3000/pause-music",
+        "service": "Light"
+      },
+      {
+        "accessory": "Http",
+        "name": "Music Box Quiet",
+        "switchHandling": "realtime",
+        "http_method": "GET",
+        "on_url":      "http://localhost:3000/music-quiet",
+        "off_url":     "http://localhost:3000/music-quiet",
+        "service": "Light"
+      },
+      {
+        "accessory": "Http",
+        "name": "Music Box Loud",
+        "switchHandling": "realtime",
+        "http_method": "GET",
+        "on_url":      "http://localhost:3000/music-loud",
+        "off_url":     "http://localhost:3000/music-loud",
+        "service": "Light"
+      },
+      {
+        "accessory": "Http",
+        "name": "Music box Radio",
+        "switchHandling": "realtime",
+        "http_method": "GET",
+        "on_url":      "http://localhost:3000/play-the-radio",
+        "off_url":     "http://localhost:3000/play-the-radio",
+        "service": "Light"
+      },
+      {
+        "accessory": "Http",
+        "name": "Epsilon camera",
+        "switchHandling": "realtime",
+        "http_method": "GET",
+        "on_url":      "http://localhost:3000/take-a-photo",
+        "off_url":     "http://localhost:3000/take-a-photo",
+        "service": "Light"
+      },
+      {
+        "accessory": "Http",
+        "name": "Epsilon Alarm",
+        "switchHandling": "realtime",
+        "http_method": "GET",
+        "on_url":      "http://localhost:3000/turn-alarm-on",
+        "off_url":     "http://localhost:3000/turn-alarm-off",
+        "service": "Light"
+      }
+    ]
+
+}

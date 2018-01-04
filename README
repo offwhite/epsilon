@@ -1,0 +1,67 @@
+--------------------------------
+           EPSILON SETUP
+--------------------------------
+
+1. flash a micro sd car with raspbian image
+2. mount it on the computer again (put it back into the laptop)
+3. `cd /Volumes/boot`
+4. `nano wpa_supplicant.conf`
+5. paste in this:
+
+```
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+network={
+    ssid="NETWORK_NAME"
+    psk="NETWORK_PASSWORD"
+    key_mgmt=WPA-PSK
+}
+```
+
+6. `touch ssh`
+7. plug sd into pi and boot it up
+8. `ssh pi@<IPADDRESS>' password is `raspberry`
+9. `sudo raspi-config` - change password and network > hostname
+10. `sudo apt-get update`
+11. `sudo apt-get install arp-scan python festival libatlas-base-dev sox python-pyaudio python-pip python3-pyaudio fswebcam motion`
+12. `cd ~/ && curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -`
+13. `sudo apt install nodejs`
+14. `sudo mkdir /bot && sudo chmod 777 /bot &&cd /bot`
+15. copy the files across
+16. `npm install`
+17. `sudo nano ~/.asoundrc`
+18. add:
+
+```
+pcm.!default {
+  type asym
+   playback.pcm {
+     type plug
+     slave.pcm "hw:0,0"
+   }
+   capture.pcm {
+     type plug
+     slave.pcm "hw:1,0"
+   }
+}
+```
+
+19. `sudo nano /etc/default/motion` - set to yes
+20. `sudo nano /etc/motion/motion.conf` update image size and threshold
+21. `sudo chown pi /var/run/motion && sudo chmod 777 /var/log/motion/motion.log` - check dir here: /var/lib/motion
+22. `crontab -e' then add `*/3 * * * * /bot/start.sh`
+
+-------- homekit --------
+
+  sudo apt-get install libavahi-compat-libdnssd-dev
+  npm install homebridge
+
+  sudo rm -rf /usr/lib/node_modules/homebridge-music-box && sudo cp -r ~/.homebridge/accessories//homebridge-music-box /usr/lib/node_modules/homebridge-music-box
+
+  speaker service:
+  https://github.com/KhaosT/HAP-NodeJS/blob/master/lib/gen/HomeKitTypes.js#L3181
+
+  security system service:
+  https://github.com/KhaosT/HAP-NodeJS/blob/master/lib/gen/HomeKitTypes.js#L3181
+
+  motion sensor service:
+    https://github.com/KhaosT/HAP-NodeJS/blob/master/lib/gen/HomeKitTypes.js#L3181

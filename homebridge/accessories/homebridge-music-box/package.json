@@ -1,0 +1,72 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "homebridge-music-box",
+        "scope": null,
+        "escapedName": "homebridge-music-box",
+        "name": "homebridge-music-box",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/home/pi/.homebridge/accessories"
+    ]
+  ],
+  "_from": "homebridge-music-box@latest",
+  "_id": "homebridge-music-box@0.0.9",
+  "_inCache": true,
+  "_location": "/homebridge-music-box",
+  "_nodeVersion": "5.1.0",
+  "_npmUser": {
+    "name": "offwhite",
+    "email": "james.offwhite@gmail.com"
+  },
+  "_npmVersion": "1.0.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "homebridge-music-box",
+    "scope": null,
+    "escapedName": "homebridge-music-box",
+    "name": "homebridge-music-box",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "author": {
+    "name": "James White"
+  },
+  "dependencies": {
+    "polling-to-event": ">=2.0.2",
+    "request": "^2.65.0"
+  },
+  "description": "music box plugin for Homebridge: https://github.com/nfarina/homebridge",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "1965ab279b5089303dc7c85ad8a2acc0cf22716c",
+    "tarball": "https://registry.npmjs.org/homebridge-http/-/homebridge-http-0.0.9.tgz"
+  },
+  "engines": {
+    "homebridge": ">=0.2.0",
+    "node": ">=0.12.0"
+  },
+  "gitHead": "f8a497ae79416f345c3aeb62f5284cbcef798146",
+  "homepage": "https://github.com/rudders/homebridge-http#readme",
+  "keywords": [
+    "homebridge-plugin"
+  ],
+  "license": "ISC",
+  "name": "homebridge-music-box",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/offwhite/homebridge-music-box.git"
+  },
+  "scripts": {},
+  "version": "0.0.9"
+}
